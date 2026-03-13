@@ -1,0 +1,53 @@
+JOHN DOE
+Email: john@example.com | Phone: (555) 123-4567 | LinkedIn: linkedin.com/in/johndoe
+
+PROFESSIONAL SUMMARY
+Experienced Full Stack Developer with 5+ years of expertise in React, Node.js, and MongoDB. Proven track record of building scalable web applications and leading development teams. Strong problem-solving skills with a focus on clean code and best practices.
+
+TECHNICAL SKILLS
+Frontend: React, TypeScript, Tailwind CSS, Next.js, Redux, HTML5, CSS3
+Backend: Node.js, Express, Python, REST APIs, GraphQL
+Databases: MongoDB, PostgreSQL, MySQL
+Tools & Platforms: Git, Docker, AWS, GitHub, Jira, Figma
+Other: Agile/Scrum, CI/CD, Microservices, Authentication (JWT, OAuth)
+
+PROFESSIONAL EXPERIENCE
+
+Senior Full Stack Developer | Tech Company Inc. | Jan 2021 - Present
+- Led development of 3 major web applications using React and Node.js, serving 100K+ users
+- Implemented microservices architecture reducing API response time by 40%
+- Mentored 4 junior developers and conducted code reviews
+- Optimized database queries using MongoDB indexing, improving performance by 35%
+- Implemented Docker containerization for consistent deployment across environments
+
+Full Stack Developer | StartUp XYZ | Jun 2019 - Dec 2020
+- Developed full-stack e-commerce platform using React, Node.js, and MongoDB
+- Implemented JWT-based authentication and authorization system
+- Created RESTful APIs handling 10K+ requests per day
+- Collaborated with UI/UX team to implement responsive designs
+- Deployed applications on AWS using EC2 and S3
+
+Junior Developer | Web Solutions Ltd. | Jan 2018 - May 2019
+- Built responsive web interfaces using React and CSS
+- Developed backend APIs using Express.js
+- Participated in agile development cycles with 2-week sprints
+- Fixed bugs and implemented new features based on user feedback
+
+EDUCATION
+Bachelor of Science in Computer Science | University Name | 2017
+GPA: 3.8/4.0
+
+CERTIFICATIONS
+- AWS Certified Solutions Architect - Associate (2022)
+- MongoDB Certified Associate Developer (2021)
+
+PROJECTS
+E-Commerce Platform: Full-stack application with React frontend, Node.js backend, MongoDB database. Features include product catalog, shopping cart, payment integration, and admin dashboard.
+
+Task Management App: Collaborative task management tool built with React and Firebase. Real-time updates, user authentication, and team collaboration features.
+
+ACHIEVEMENTS
+- Reduced application load time by 50% through code optimization
+- Implemented automated testing increasing code coverage from 40% to 85%
+- Successfully migrated legacy system to microservices architecture
+- Received "Developer of the Year" award in 2022
