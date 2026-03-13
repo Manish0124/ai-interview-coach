@@ -428,67 +428,119 @@ function generateFallbackResumeQuestions(resumeText) {
   const questions = [];
   const resumeLower = resumeText.toLowerCase();
 
-  const skillKeywords = {
-    'react': 'React',
-    'node': 'Node.js',
-    'python': 'Python',
-    'java': 'Java',
-    'javascript': 'JavaScript',
-    'typescript': 'TypeScript',
-    'mongodb': 'MongoDB',
-    'sql': 'SQL',
-    'aws': 'AWS',
-    'docker': 'Docker'
+  const skillQuestions = {
+    'react': [
+      { q: 'Explain the difference between state and props in React', d: 'Medium', c: 'React' },
+      { q: 'How do React hooks like useState and useEffect work?', d: 'Hard', c: 'React Hooks' },
+      { q: 'What is the Virtual DOM and why is it important?', d: 'Medium', c: 'React Concepts' }
+    ],
+    'node': [
+      { q: 'Explain the event-driven architecture of Node.js', d: 'Hard', c: 'Node.js' },
+      { q: 'What is middleware in Express and how do you use it?', d: 'Medium', c: 'Express' },
+      { q: 'How do you handle asynchronous operations in Node.js?', d: 'Hard', c: 'Async' }
+    ],
+    'python': [
+      { q: 'Explain list comprehensions and their advantages', d: 'Medium', c: 'Python' },
+      { q: 'What are decorators in Python and how do you use them?', d: 'Hard', c: 'Python Advanced' },
+      { q: 'Explain the difference between mutable and immutable objects', d: 'Medium', c: 'Python Concepts' }
+    ],
+    'java': [
+      { q: 'Explain the concept of inheritance and polymorphism in Java', d: 'Hard', c: 'OOP' },
+      { q: 'What is the difference between abstract classes and interfaces?', d: 'Hard', c: 'Java' },
+      { q: 'How does garbage collection work in Java?', d: 'Medium', c: 'Java Memory' }
+    ],
+    'javascript': [
+      { q: 'Explain closures in JavaScript with an example', d: 'Hard', c: 'JavaScript' },
+      { q: 'What is the difference between var, let, and const?', d: 'Medium', c: 'JavaScript' },
+      { q: 'How does the event loop work in JavaScript?', d: 'Hard', c: 'JavaScript Advanced' }
+    ],
+    'typescript': [
+      { q: 'What are generics in TypeScript and why are they useful?', d: 'Hard', c: 'TypeScript' },
+      { q: 'Explain interfaces and types in TypeScript', d: 'Medium', c: 'TypeScript' },
+      { q: 'How do you handle type safety in TypeScript?', d: 'Medium', c: 'TypeScript' }
+    ],
+    'mongodb': [
+      { q: 'Explain the difference between SQL and NoSQL databases', d: 'Medium', c: 'Database' },
+      { q: 'What are indexes in MongoDB and why are they important?', d: 'Hard', c: 'MongoDB' },
+      { q: 'How do you handle transactions in MongoDB?', d: 'Hard', c: 'MongoDB' }
+    ],
+    'sql': [
+      { q: 'Explain the different types of JOINs in SQL', d: 'Hard', c: 'SQL' },
+      { q: 'What are indexes and how do they improve query performance?', d: 'Hard', c: 'SQL' },
+      { q: 'Explain normalization and its importance in database design', d: 'Hard', c: 'Database Design' }
+    ],
+    'aws': [
+      { q: 'Explain the different AWS compute services and when to use them', d: 'Hard', c: 'AWS' },
+      { q: 'What is auto-scaling and how does it work in AWS?', d: 'Medium', c: 'AWS' },
+      { q: 'How do you ensure security in AWS applications?', d: 'Hard', c: 'AWS Security' }
+    ],
+    'docker': [
+      { q: 'Explain the difference between Docker containers and virtual machines', d: 'Medium', c: 'Docker' },
+      { q: 'What is Docker Compose and how do you use it?', d: 'Medium', c: 'Docker' },
+      { q: 'How do you optimize Docker images for production?', d: 'Hard', c: 'Docker' }
+    ]
   };
 
   const detectedSkills = [];
-  for (const [keyword, skill] of Object.entries(skillKeywords)) {
+  for (const keyword of Object.keys(skillQuestions)) {
     if (resumeLower.includes(keyword)) {
-      detectedSkills.push(skill);
+      detectedSkills.push(keyword);
     }
   }
 
   if (detectedSkills.length > 0) {
-    questions.push({
-      _id: '1',
-      type: 'Resume-Based',
-      question: `Tell me about your experience with ${detectedSkills[0]}. What projects have you worked on?`,
-      difficulty: 'Medium',
-      category: 'Experience'
+    const skill = detectedSkills[0];
+    const skillQs = skillQuestions[skill];
+    skillQs.forEach((sq) => {
+      if (questions.length < 5) {
+        questions.push({
+          _id: String(questions.length + 1),
+          type: 'Resume-Based',
+          question: sq.q,
+          difficulty: sq.d,
+          category: sq.c
+        });
+      }
     });
   }
 
-  questions.push({
-    _id: String(questions.length + 1),
-    type: 'Resume-Based',
-    question: 'Describe your most challenging project and how you overcame the obstacles.',
-    difficulty: 'Hard',
-    category: 'Problem-Solving'
-  });
+  for (let i = 1; i < detectedSkills.length && questions.length < 5; i++) {
+    const skill = detectedSkills[i];
+    const skillQs = skillQuestions[skill];
+    if (skillQs && skillQs[0]) {
+      questions.push({
+        _id: String(questions.length + 1),
+        type: 'Resume-Based',
+        question: skillQs[0].q,
+        difficulty: skillQs[0].d,
+        category: skillQs[0].c
+      });
+    }
+  }
 
-  questions.push({
-    _id: String(questions.length + 1),
-    type: 'Resume-Based',
-    question: 'What is your biggest achievement in your professional career?',
-    difficulty: 'Medium',
-    category: 'Achievement'
-  });
+  const generalQuestions = [
+    { q: 'Describe your most challenging technical project and how you solved it', d: 'Hard', c: 'Problem-Solving' },
+    { q: 'How do you approach system design and architecture?', d: 'Hard', c: 'Architecture' },
+    { q: 'What is your experience with version control and CI/CD pipelines?', d: 'Medium', c: 'DevOps' },
+    { q: 'How do you ensure code quality and maintainability?', d: 'Medium', c: 'Best Practices' },
+    { q: 'Tell me about your experience with testing and debugging', d: 'Medium', c: 'Testing' }
+  ];
 
-  questions.push({
-    _id: String(questions.length + 1),
-    type: 'Resume-Based',
-    question: 'How do you stay updated with the latest technologies and trends?',
-    difficulty: 'Easy',
-    category: 'Learning'
-  });
-
-  questions.push({
-    _id: String(questions.length + 1),
-    type: 'Resume-Based',
-    question: 'Tell me about a time you had to learn a new technology quickly for a project.',
-    difficulty: 'Medium',
-    category: 'Adaptability'
-  });
+  while (questions.length < 5) {
+    const idx = questions.length - (detectedSkills.length > 0 ? detectedSkills.length : 0);
+    const gq = generalQuestions[idx];
+    if (gq) {
+      questions.push({
+        _id: String(questions.length + 1),
+        type: 'Resume-Based',
+        question: gq.q,
+        difficulty: gq.d,
+        category: gq.c
+      });
+    } else {
+      break;
+    }
+  }
 
   return questions.slice(0, 5);
 }
